@@ -1731,13 +1731,38 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
     submitBtn.setAttribute('aria-busy','true');
     submitBtn.querySelector('.btn-label').textContent = 'שולחת…';
 
-    /* TODO: POST to the CRM / automation endpoint, then resolve. */
-    setTimeout(function(){
-      form.style.display = 'none';
-      success.style.display = 'block';
-      success.scrollIntoView({block:'center', behavior: reduce ? 'auto' : 'smooth'});
-      document.getElementById('success-heading').focus();
-    }, 700);
+    /* Creates/updates a Wix contact via the site's http-function — see
+       wix-backend/http-functions.js for the backend half of this call. */
+    var SUBMIT_URL = 'https://www.osteoliftingpro.com/_functions/submitSignup';
+
+    fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('f-name').value.trim(),
+        phone: document.getElementById('f-phone').value.trim(),
+        email: document.getElementById('f-email').value.trim()
+      })
+    })
+      .then(function(res){ if (!res.ok) throw new Error('submit failed'); return res.json(); })
+      .then(function(){
+        form.style.display = 'none';
+        success.style.display = 'block';
+        success.scrollIntoView({block:'center', behavior: reduce ? 'auto' : 'smooth'});
+        document.getElementById('success-heading').focus();
+      })
+      .catch(function(){
+        submitBtn.removeAttribute('data-loading');
+        submitBtn.removeAttribute('aria-busy');
+        submitBtn.querySelector('.btn-label').textContent = 'אני רוצה להצטרף למחנה';
+        errorList.innerHTML = '';
+        var li = document.createElement('li');
+        li.textContent = 'ההרשמה לא הושלמה — בדקי את החיבור ונסי שוב, או כתבי לנו בוואטסאפ.';
+        errorList.appendChild(li);
+        errorBox.hidden = false;
+        errorBox.focus();
+        errorBox.scrollIntoView({block:'center', behavior: reduce ? 'auto' : 'smooth'});
+      });
   });
 })();
 </script>
