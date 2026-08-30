@@ -17,7 +17,7 @@
  * hand in the dashboard; there's no API for creating automations.
  */
 
-import { ok, badRequest, options } from 'wix-http-functions';
+import { ok, badRequest, response } from 'wix-http-functions';
 import { contacts } from 'wix-crm-backend';
 import { elevate } from 'wix-auth';
 
@@ -33,7 +33,7 @@ const CORS_HEADERS = {
 
 // Handles the browser's CORS preflight request.
 export function options_submitSignup() {
-  return options({ headers: CORS_HEADERS });
+  return response({ status: 204, headers: CORS_HEADERS });
 }
 
 export async function post_submitSignup(request) {
