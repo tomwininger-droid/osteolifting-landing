@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://example.com/og.jpg"><!-- Placeholder: 1200×630 -->
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23452291'/%3E%3Cpath d='M9.5 22.5a2.6 2.6 0 1 1-2.3-2.6 2.6 2.6 0 1 1 3.3-2.9l4.4-4.4a2.6 2.6 0 1 1 2.9-3.3 2.6 2.6 0 1 1 4.3 4.2l-4.4 4.4a2.6 2.6 0 1 1-3.3 2.9 2.6 2.6 0 0 1-4.9 1.7Z' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,12 +24,6 @@
 
 <script>
 document.documentElement.classList.add('js');
-try{
-  if (window.self !== window.top) document.documentElement.classList.add('embedded');
-}catch(e){
-  /* cross-origin access to window.top throws only when actually framed */
-  document.documentElement.classList.add('embedded');
-}
 </script>
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -322,13 +316,10 @@ section{padding-block:var(--s-9);}
 .site-header .container{height:100%; display:flex; align-items:center; justify-content:space-between; gap:var(--s-4);}
 .logo{display:flex; align-items:center; gap:10px; text-decoration:none; min-height:44px;}
 .logo-mark{
-  width:42px; height:42px; border-radius:var(--r-sm);
-  background-color:var(--v-700);
-  background-image:linear-gradient(140deg, var(--v-600), var(--v-800));
-  display:grid; place-items:center; color:#fff; flex-shrink:0;
+  width:42px; height:42px; border-radius:50%;
+  display:block; object-fit:contain; flex-shrink:0;
   box-shadow:var(--e-1);
 }
-.logo-mark svg{width:23px; height:23px;}
 .logo-text{display:flex; flex-direction:column; line-height:1.15;}
 .logo-text b{font-family:var(--font-display); font-size:19px; color:var(--ink); font-weight:800; letter-spacing:-.01em;}
 .logo-text span{font-size:var(--t-2xs); color:var(--ink-3); font-weight:500;}
@@ -516,48 +507,67 @@ section{padding-block:var(--s-9);}
 .mech-item:hover h3{color:var(--v-700);}
 
 /* ═══ RESEARCH ═══════════════════════════════════════════ */
-.research{padding:var(--s-6); border-color:var(--v-300);}
+.research-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--s-8); align-items:stretch;}
+.research-media{border-radius:var(--r-lg); box-shadow:var(--e-2); background:var(--paper); padding:var(--s-4);}
+.research-media img{width:100%; height:100%; object-fit:contain; object-position:center top; display:block; border-radius:calc(var(--r-lg) - 6px);}
+.research{padding:var(--s-7); border-color:var(--v-300);}
 .research-head{
-  display:flex; align-items:center; gap:var(--s-3);
-  margin-bottom:var(--s-5); padding-bottom:var(--s-5);
-  border-block-end:1px solid var(--line);
+  display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s-3);
+  margin-bottom:var(--s-5);
 }
+.research-head b{display:block; color:var(--ink); font-size:var(--t-lg); font-weight:800; font-family:var(--font-display);}
+.research-head span{font-size:var(--t-xs); color:var(--ink-3);}
 .research-head .ri{
   width:46px; height:46px; border-radius:var(--r-sm); flex-shrink:0;
   background:var(--v-100); color:var(--v-700);
   display:grid; place-items:center;
 }
 .research-head .ri svg{width:24px; height:24px;}
-.research-head b{display:block; color:var(--ink); font-size:var(--t-md); font-weight:800; font-family:var(--font-display);}
-.research-head span{font-size:var(--t-xs); color:var(--ink-3);}
-.research-meta{display:flex; flex-wrap:wrap; gap:var(--s-2); margin-bottom:var(--s-5);}
-.res-stats{display:grid; grid-template-columns:1fr 1fr; gap:var(--s-4);}
-.res-stat{
-  padding:var(--s-5) var(--s-3); text-align:center;
-  border-radius:var(--r-md);
-  transition:transform var(--t-base-dur) var(--ease),
-             box-shadow var(--t-base-dur) var(--ease),
-             background var(--t-fast) var(--ease),
-             border-color var(--t-fast) var(--ease);
-  border:1px solid var(--line);
+.research-div{border:0; border-block-start:1px solid var(--line); margin:0 0 var(--s-5);}
+.research-subject{
+  display:flex; align-items:center; gap:var(--s-2);
+  font-size:var(--t-md); font-weight:700; color:var(--ink); line-height:1.35;
+  margin:0 0 var(--s-5);
 }
-.res-stat:hover{transform:translateY(-4px); box-shadow:var(--e-2); background:var(--paper); border-color:var(--v-300);}
-.res-stat .n{
-  display:block; font-family:var(--font-display); font-size:42px; font-weight:900;
-  color:var(--v-700); line-height:1; margin-bottom:var(--s-2); direction:ltr;
-  font-variant-numeric:tabular-nums;
+.research-subject svg{width:22px; height:22px; color:var(--v-600); flex-shrink:0;}
+.research-facts{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--s-3); margin-bottom:var(--s-5);}
+.rf{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
+  background:var(--v-50); border-radius:var(--r-md); padding:var(--s-4) var(--s-2);
 }
-.res-stat .l{font-size:var(--t-sm); color:var(--ink-2); line-height:1.4;}
-.res-source{
-  margin-top:var(--s-5); font-size:var(--t-xs); color:var(--ink-3);
-  padding-top:var(--s-4); border-block-start:1px solid var(--line);
+.rf svg{width:20px; height:20px; color:var(--v-600);}
+.rf b{font-size:var(--t-lg); font-weight:800; color:var(--ink); font-family:var(--font-display); direction:ltr;}
+.rf span{font-size:var(--t-2xs); color:var(--ink-3);}
+.research-results{
+  background:linear-gradient(165deg, var(--v-100), var(--v-50) 65%);
+  border-radius:var(--r-lg); padding:var(--s-6) var(--s-5) var(--s-5); margin-bottom:var(--s-5);
 }
+.rr-stats{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:var(--s-4); margin-bottom:var(--s-4);}
+.rr-stat{text-align:center;}
+.rr-stat .n{
+  display:block; font-family:var(--font-display); font-weight:900; font-size:clamp(30px,4vw,40px);
+  color:var(--v-700); line-height:1; margin-bottom:6px; direction:ltr; font-variant-numeric:tabular-nums;
+}
+.rr-stat .l{font-size:var(--t-xs); color:var(--ink-2); line-height:1.35;}
+.rr-divider{width:1px; align-self:stretch; background:var(--v-300);}
+.rr-chart{width:100%; height:auto; display:block; margin-bottom:var(--s-3); overflow:visible;}
+.rr-chart path{stroke:var(--v-600); fill:none;}
+.rr-chart circle{fill:var(--v-600);}
+.rr-caption{text-align:center; font-size:var(--t-xs); color:var(--ink-3);}
+.research-cite{display:flex; align-items:flex-start; gap:var(--s-3);}
+.research-cite p{margin:0; font-size:var(--t-sm); color:var(--ink-2); line-height:1.5;}
+.rc-ico{
+  flex-shrink:0; width:38px; height:38px; border-radius:var(--r-sm);
+  background:var(--v-100); color:var(--v-700); display:grid; place-items:center;
+}
+.rc-ico svg{width:18px; height:18px;}
 .callout{
   display:flex; gap:var(--s-3); align-items:flex-start;
   background:var(--caution-bg); border:1px solid var(--caution-line);
   border-radius:var(--r-md); padding:20px 22px;
   color:var(--caution-ink); font-size:var(--t-md);
   margin-top:var(--s-6); line-height:var(--lh-snug);
+  max-width:860px; margin-inline:auto;
 }
 .callout svg{width:24px; height:24px; flex-shrink:0; margin-block-start:2px;}
 .callout strong{color:var(--caution-ink);}
@@ -587,9 +597,14 @@ section{padding-block:var(--s-9);}
   background:var(--ink); border-radius:var(--r-sm); z-index:3;
 }
 .screen{
-  width:100%; height:100%;
+  /* Pinned to the frame rather than sized with height:100%. The phone's height
+     comes from aspect-ratio, which Safari doesn't treat as a definite height,
+     so a percentage height here collapses to content height and the screen
+     spills out the bottom of the bezel. inset removes that dependency. */
+  position:absolute; inset:9px;
   background:var(--paper); border-radius:calc(var(--r-2xl) - 9px);
   overflow:hidden; display:flex; flex-direction:column; text-align:start;
+  -webkit-mask-image:-webkit-radial-gradient(white, black);
 }
 .scr-top{
   background-color:var(--v-700);
@@ -598,14 +613,9 @@ section{padding-block:var(--s-9);}
 }
 .scr-top .t1{font-size:11px; opacity:.85;}
 .scr-top .t2{font-size:14.5px; font-weight:800;}
-.scr-body{padding:12px; display:flex; flex-direction:column; gap:7px; flex:1; overflow:hidden;}
-.scr-body--photo{padding:0;}
-.scr-body--center{
-  justify-content:center; align-items:center; padding:20px;
-  background-image:linear-gradient(165deg, var(--v-300), var(--v-100) 55%, var(--v-50));
-}
-.notif-card{width:100%; display:block; border-radius:var(--r-md); box-shadow:var(--e-2); border:1px solid var(--line);}
-.scr-shot{width:100%; height:100%; object-fit:cover; object-position:top; display:block;}
+.scr-body{padding:12px; display:flex; flex-direction:column; gap:7px; flex:1; min-height:0; overflow:hidden;}
+.scr-body--photo{padding:0; position:relative;}
+.scr-shot{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block;}
 
 .vid-tile{
   background:linear-gradient(140deg, var(--v-300), var(--v-100));
@@ -853,7 +863,6 @@ footer{
   font-size:var(--t-sm); text-align:center;
 }
 footer .flogo{display:inline-flex; align-items:center; gap:10px; margin-bottom:var(--s-4); color:#fff; font-family:var(--font-display); font-weight:800; font-size:20px;}
-footer .flogo .logo-mark{background-image:none; background-color:rgba(255,255,255,.13); box-shadow:none;}
 footer a{color:#fff; text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px;}
 footer nav{display:flex; gap:var(--s-2) var(--s-4); justify-content:center; flex-wrap:wrap; margin-block:var(--s-3);}
 footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-inline:var(--s-2);}
@@ -874,7 +883,10 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
   box-shadow:0 -6px 24px rgba(35,16,80,.14);
   gap:var(--s-3); align-items:center;
+  opacity:0; transform:translateY(12px); pointer-events:none;
+  transition:opacity var(--t-base-dur) var(--ease), transform var(--t-base-dur) var(--ease);
 }
+.dock[data-visible]{opacity:1; transform:none; pointer-events:auto;}
 .dock .btn{flex:1;}
 .wa-btn{
   flex-shrink:0; width:58px; height:58px; border-radius:var(--r-sm);
@@ -901,14 +913,6 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 .wa-float svg{width:26px; height:26px; flex-shrink:0;}
 .wa-float[data-visible]{opacity:1; transform:none; pointer-events:auto;}
 .wa-float:hover{transform:translateY(-2px);}
-
-/* Embedded inside a Wix HtmlComponent: no real viewport of our own, so
-   position:fixed elements can't track scroll correctly. Hide them —
-   the page still has plenty of in-content CTA buttons. */
-.embedded .dock,
-.embedded .wa-float{display:none !important;}
-.embedded .site-header{position:static;}
-:root.embedded{--dock-h:0px;}
 
 /* ═══ REVEAL — restrained, and only where sequence matters ═══ */
 .js [data-reveal]{
@@ -961,14 +965,15 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   .hero{padding-block:var(--s-6) var(--s-8);}
   .hero-grid{grid-template-columns:1fr; gap:var(--s-6);}
   .hero-media{order:-1; max-width:420px; margin-inline:auto; width:100%;}
-  .media-frame{aspect-ratio:4/3;}
+  .media-frame{aspect-ratio:auto; height:62dvh; max-height:520px;}
   .play-btn,.play-btn::before{width:76px; height:76px;}
   .float-badge{inset-inline-start:12px; inset-block-end:12px; padding:11px 14px; max-width:220px;}
   .header-cta{display:none;}
   .dock{display:flex;}
   .wa-float{display:none;}
   .hero-cta,.hero-cta .btn{max-width:none; width:100%;}
-  .res-stats{grid-template-columns:1fr;}
+  .research-facts{grid-template-columns:repeat(2,1fr);}
+  .research-grid{grid-template-columns:1fr; gap:var(--s-5);}
   .guarantees{grid-template-columns:1fr; gap:var(--s-2);}
   .guar{display:flex; align-items:center; gap:var(--s-3); text-align:start; padding:12px 14px;}
   .guar .gi{margin:0; flex-shrink:0;}
@@ -987,7 +992,6 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   .trust-bar ul{flex-direction:column; gap:10px;}
   .trust-bar .sep{display:none;}
   .quote{font-size:var(--t-md);}
-  .res-stat .n{font-size:38px;}
 }
 </style>
 </head>
@@ -1020,6 +1024,10 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22.4 7.6-6 4.4 6 4.4V7.6Z"/><rect x="1.6" y="5.2" width="14.8" height="13.6" rx="2.4"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.4s7.6-3.8 7.6-9.5V5.2L12 2.4 4.4 5.2v6.7c0 5.7 7.6 9.5 7.6 9.5Z"/><path d="m8.9 11.9 2.2 2.2 4-4.2"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16.4 21v-1.9a3.9 3.9 0 0 0-3.9-3.9H5.9A3.9 3.9 0 0 0 2 19.1V21"/><circle cx="9.2" cy="7.2" r="3.9"/><path d="M22 21v-1.9a3.9 3.9 0 0 0-2.9-3.77M15.6 3.44a3.9 3.9 0 0 1 0 7.56"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v5.2l3.6 2.1"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="5" width="17.6" height="15.4" rx="2.4"/><path d="M3.2 9.8h17.6M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.9"/><path d="M4.8 20.2v-1a5.2 5.2 0 0 1 5.2-5.2h4a5.2 5.2 0 0 1 5.2 5.2v1"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.8h8l4.4 4.4v13.2a1 1 0 0 1-1 1H6.4a1 1 0 0 1-1-1V3.8a1 1 0 0 1 1-1Z"/><path d="M14 2.8v4.8h4.4M8.2 12.4h7.6M8.2 16.2h7.6"/></symbol>
   <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.2 6.4 13.4 15.2l-4.6-4.6L1.8 17.6"/><path d="M16.6 6.4h5.6V12"/></symbol>
   <symbol id="i-pill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="10.6" width="17.6" height="7.8" rx="3.9" transform="rotate(-45 12 12)"/><path d="M8.6 8.6 15.4 15.4"/></symbol>
   <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="8.4" width="18.4" height="12.8" rx="2"/><path d="M2.8 13.2h18.4M12 8.4v12.8"/><path d="M12 8.4S10.4 3.2 7.8 3.2a2.6 2.6 0 0 0 0 5.2Zm0 0s1.6-5.2 4.2-5.2a2.6 2.6 0 0 1 0 5.2Z"/></symbol>
@@ -1030,14 +1038,14 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 <header class="site-header" id="site-header">
   <div class="container">
     <a href="#top" class="logo">
-      <span class="logo-mark"><svg aria-hidden="true" focusable="false"><use href="#i-bone"/></svg></span>
+      <img class="logo-mark" src="images/logo.png" alt="Osteolifting">
       <span class="logo-text">
-        <b>Osteolifting</b>
-        <span>אימוני כוח לעצם</span>
+        <b>Osteolifting Workout</b>
+        <span>אימוני צפיפות עצם</span>
       </span>
     </a>
-    <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top" class="btn btn--sm header-cta">
-      <span class="btn-label">הצטרפי למחנה, 7 ימים חינם</span>
+    <a href="#signup" class="btn btn--sm header-cta">
+      <span class="btn-label">שרייני מקום למחנה האימונים הקרוב</span>
       <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
     </a>
   </div>
@@ -1060,8 +1068,8 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
         <cite>ליסה, מייסדת Osteolifting</cite>
       </blockquote>
       <div class="hero-cta">
-        <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top" class="btn btn--block">
-          <span class="btn-label">הצטרפי למחנה, 7 ימים חינם</span>
+        <a href="#signup" class="btn btn--block">
+          <span class="btn-label">שרייני מקום למחנה האימונים הקרוב</span>
           <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
         </a>
       </div>
@@ -1119,8 +1127,7 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 
     <div class="problem-callout">
       <div class="head">
-        <h2>אחרי גיל המעבר, העצם מאבדת צפיפות בשקט</h2>
-        <p class="lead">אין כאב ואין סימן מקדים. רוב הנשים מגלות את זה רק אחרי בדיקה, או אחרי שבר. הליכה ושחייה מצוינות לבריאות, אבל הן לא מספקות לעצם את הגירוי שהיא צריכה כדי להתחזק.</p>
+        <p class="lead"><strong>את לא לבד. אחת מכל שתי נשים מעל גיל 50 תחווה שבר על רקע אוסטאופורוזיס במהלך חייה.</strong></p>
       </div>
       <div class="problem-stats stagger">
         <div class="problem-stat surface" data-reveal>
@@ -1185,8 +1192,8 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   <div class="container container--prose">
     <h2>מוכנה להפסיק לנחש ולהתחיל לבנות עצם?</h2>
     <p class="lead">מחנה 7 הימים ילווה אותך צעד־צעד, אימונים, פידבק אישי ומעקב, הכול בחינם.</p>
-    <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top" class="btn btn--invert">
-      <span class="btn-label">הצטרפי למחנה, 7 ימים חינם</span>
+    <a href="#signup" class="btn btn--invert">
+      <span class="btn-label">שרייני מקום למחנה האימונים הקרוב</span>
       <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
     </a>
     <ul class="reassure is-center reassure--on-dark">
@@ -1199,38 +1206,64 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 
 <!-- ═══ SCIENCE ═══ -->
 <section>
-  <div class="container container--prose">
+  <div class="container">
     <div class="head">
-      <h2>השיטה נקראת HIRIT, ויש עליה מחקר</h2>
-      <p class="lead">אימון התנגדות המשולב עם אימון אימפקט: שיטה מובנית ומדורגת שמשלבת תרגילי כוח ותרגילי עומס בטוחים, בדיוק העוצמה שהעצם שלך צריכה כדי להתחיל לבנות את עצמה מחדש.</p>
+      <h2>השיטה: אימון התנגדות המשולב עם אימון אימפקט (HIRIT)</h2>
+      <p class="lead">שיטה מובנית ומדורגת שמשלבת תרגילי כוח ותרגילי עומס בטוחים, בדיוק העוצמה שהעצם שלך צריכה כדי להתחיל לבנות את עצמה מחדש.</p>
     </div>
 
-    <div class="research surface surface--raised">
+    <div class="research-grid">
+      <div class="research surface surface--raised">
       <div class="research-head">
-        <span class="ri"><svg aria-hidden="true" focusable="false"><use href="#i-flask"/></svg></span>
         <div>
           <b>מחקר LIFTMOR</b>
           <span>אוניברסיטת גריפית', אוסטרליה · ניסוי מבוקר אקראי</span>
         </div>
+        <span class="ri"><svg aria-hidden="true" focusable="false"><use href="#i-flask"/></svg></span>
       </div>
-      <ul class="research-meta">
-        <li class="chip">101 נשים לאחר גיל המעבר</li>
-        <li class="chip">גיל ממוצע 65</li>
-        <li class="chip">8 חודשים</li>
-        <li class="chip">2 אימונים בשבוע</li>
-        <li class="chip">30 דקות לאימון</li>
-      </ul>
-      <div class="res-stats">
-        <div class="res-stat surface--tint">
-          <span class="n">4%+</span>
-          <span class="l">צפיפות עצם בעמוד השדרה המותני,<br>לעומת קבוצת הביקורת</span>
-        </div>
-        <div class="res-stat surface--tint">
-          <span class="n">2%+</span>
-          <span class="l">צפיפות עצם בצוואר הירך,<br>לעומת קבוצת הביקורת</span>
-        </div>
+
+      <span class="badge"><svg aria-hidden="true" focusable="false"><use href="#i-shield"/></svg> מחקר קליני מבוקר</span>
+
+      <hr class="research-div">
+
+      <p class="research-subject"><svg aria-hidden="true" focusable="false"><use href="#i-users"/></svg> 101 נשים לאחר גיל המעבר עם אוסטאופניה או אוסטאופורוזיס</p>
+
+      <div class="research-facts">
+        <div class="rf"><svg aria-hidden="true" focusable="false"><use href="#i-user"/></svg><b>65</b><span>גיל ממוצע</span></div>
+        <div class="rf"><svg aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><b>8</b><span>חודשים</span></div>
+        <div class="rf"><svg aria-hidden="true" focusable="false"><use href="#i-weight"/></svg><b>2</b><span>אימונים בשבוע</span></div>
+        <div class="rf"><svg aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><b>30</b><span>דקות לאימון</span></div>
       </div>
-      <p class="res-source">Watson et al., <em>Journal of Bone and Mineral Research</em>, 2018. קבוצת הביקורת ביצעה אימון ביתי בעצימות נמוכה. הנתונים מתייחסים לתנאי המחקר המבוקר.</p>
+
+      <div class="research-results">
+        <div class="rr-stats">
+          <div class="rr-stat">
+            <span class="n">+4%</span>
+            <span class="l">צפיפות עצם בעמוד<br>השדרה המותני</span>
+          </div>
+          <span class="rr-divider" aria-hidden="true"></span>
+          <div class="rr-stat">
+            <span class="n">+2%</span>
+            <span class="l">צפיפות עצם<br>בצוואר הירך</span>
+          </div>
+        </div>
+        <svg class="rr-chart" viewBox="0 0 320 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M10,76 C55,70 85,58 125,50 C165,42 205,30 225,24 C255,15 285,11 310,8" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="55" cy="70" r="4.5"/>
+          <circle cx="165" cy="42" r="4.5"/>
+          <circle cx="300" cy="9" r="4.5"/>
+        </svg>
+        <p class="rr-caption">בהשוואה לקבוצת הביקורת</p>
+      </div>
+
+      <div class="research-cite">
+        <p>Watson et al., <em>Journal of Bone and Mineral Research</em>, 2018. קבוצת הביקורת ביצעה אימון ביתי בעצימות נמוכה.</p>
+        <span class="rc-ico"><svg aria-hidden="true" focusable="false"><use href="#i-file"/></svg></span>
+      </div>
+      </div>
+      <div class="research-media">
+        <img src="images/research1.png" alt="עמוד המחקר LIFTMOR ב-PubMed, Watson et al., Journal of Bone and Mineral Research 2018" loading="lazy">
+      </div>
     </div>
 
     <div class="callout">
@@ -1245,6 +1278,7 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   <div class="container">
     <div class="head head--center">
       <h2>לא עוד ספריית סרטונים. מאמנת שרואה אותך.</h2>
+      <p class="lead">את יכולה למצוא אלפי סרטוני אימון בחינם. מה שאת לא מוצאת בשום מקום אחר זה מישהי שרואה אותך מתאמנת ונותנת פידבקים לפי הדגשים שאת צריכה.</p>
       <p class="lead">כל האימונים, המעקב והליווי במקום אחד, פשוט, גדול וברור, גם למי שלא "טכנולוגית".</p>
     </div>
 
@@ -1293,8 +1327,8 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
               <div class="t1">ההתקדמות שלי</div>
               <div class="t2">כל שלב מקבל חיזוק</div>
             </div>
-            <div class="scr-body scr-body--center">
-              <img class="notif-card" src="images/screen-notification.jpg" alt="התראה אמיתית מהאפליקציה: השלב הושלם, האתגר הושלם">
+            <div class="scr-body scr-body--photo">
+              <img class="scr-shot" src="images/screen-progress.jpg" alt="מסך האפליקציה: שלב האימון הושלם">
             </div>
           </div>
         </div>
@@ -1381,8 +1415,8 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   <div class="container container--prose">
     <h2>שריני את המקום שלך במחנה 7 הימים</h2>
     <p class="lead">בדיוק ראית מה קורה בכל יום. עכשיו התור שלך להתחיל.</p>
-    <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top" class="btn btn--invert">
-      <span class="btn-label">הצטרפי למחנה, 7 ימים חינם</span>
+    <a href="#signup" class="btn btn--invert">
+      <span class="btn-label">שרייני מקום למחנה האימונים הקרוב</span>
       <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
     </a>
     <ul class="reassure is-center reassure--on-dark">
@@ -1460,7 +1494,9 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
     </div>
     <div class="about-body prose">
       <h2>ליסה, המאמנת שמאחורי השיטה</h2>
-      <p style="margin-top:var(--s-4);">[Placeholder: הסיפור האישי, הרגע שבו ליסה הבינה שאימוני עוצמה, ולא רק המלצות כלליות, יכולים לשנות את המסלול של נשים בגיל המעבר.]</p>
+      <p style="margin-top:var(--s-4);">הכל התחיל בזכות חברה טובה, שלאורך שנים שיתפה אותי באוסטיאופורוזיס שלה ובתסכול מההחמרה. היא ניסתה הכול: פילאטיס, פלדנקרייז בעקבות כאבי גב, שנים של התעמלות בונה עצם, אבל בכל בדיקה חוזרת המצב רק החמיר.</p>
+      <p>המלצתי לה לא פעם להתחזק באימוני משקולות, אבל זו הייתה רק אינטואיציה של מאמנת כושר, לא ידעתי שיש מאחוריה בסיס מחקרי. כשהרופאה אמרה לה שהגיע הזמן לתרופות, היא פנתה כמוצא אחרון למאמן אישי. תוך 5 חודשים הכאבים נעלמו, היא נמנעה מניתוח שהומלץ לה, ובבדיקת הדקסה הבאה צפיפות העצם שלה עלתה. אחרי שנתיים היא חזרה לאוסטיאופניה.</p>
+      <p>זה הדהים אותי. תמיד האמנתי במיתוסים המוכרים, שמשקולות וקפיצות מסוכנות לנשים עם אוסטיאופורוזיס. הסקרנות הובילה אותי למחקר, ולהפתעתי גיליתי עדויות מוצקות שאימוני כוח ואימוני אימפקט יעילים יותר מכל סוג פעילות אחר בהעלאת צפיפות העצם.</p>
       <p>מה היא גילתה, שהמלצות כמו "תעשי הליכות ותקחי סידן" לא מבוססות מספיק.</p>
       <ul class="credentials">
         <li class="chip">מכללת וינגייט</li>
@@ -1590,13 +1626,13 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 <footer>
   <div class="container">
     <span class="flogo">
-      <span class="logo-mark"><svg aria-hidden="true" focusable="false"><use href="#i-bone"/></svg></span>
-      Osteolifting
+      <img class="logo-mark" src="images/logo.png" alt="Osteolifting">
+      Osteolifting Workout
     </span>
     <p>מועדון אימוני כוח לנשים · ליסה</p>
     <nav aria-label="ניווט תחתון">
       <a href="#what-you-get">מה מקבלים</a>
-      <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top">הרשמה למחנה</a>
+      <a href="#signup">הרשמה למחנה</a>
       <a href="#">דברי איתנו</a>
       <a href="#">תנאי שימוש</a>
       <a href="#">פרטיות</a>
@@ -1609,17 +1645,17 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 
 <!-- ═══ MOBILE DOCK ═══ -->
 <div class="dock">
-  <a href="https://www.osteoliftingpro.com/?rc=test-site#form" target="_top" class="btn">
-    <span class="btn-label">הצטרפי למחנה, חינם</span>
+  <a href="#signup" class="btn">
+    <span class="btn-label">שרייני מקום למחנה</span>
     <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
   </a>
-  <a class="wa-btn" href="https://wa.me/972500000000?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%92%D7%91%D7%99%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94" target="_blank" rel="noopener" aria-label="שאלה? כתבי לנו בוואטסאפ">
+  <a class="wa-btn" href="https://wa.me/972546745335?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%92%D7%91%D7%99%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94" target="_blank" rel="noopener" aria-label="שאלה? כתבי לנו בוואטסאפ">
     <svg aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>
   </a>
 </div>
 
 <!-- ═══ DESKTOP SUPPORT ═══ -->
-<a href="https://wa.me/972500000000?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%92%D7%91%D7%99%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94" id="wa-float" class="wa-float" target="_blank" rel="noopener">
+<a href="https://wa.me/972546745335?text=%D7%94%D7%99%D7%99%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%9C%D7%92%D7%91%D7%99%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94" id="wa-float" class="wa-float" target="_blank" rel="noopener">
   <svg aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg>
   <span>לכל שאלה, אני כאן</span>
 </a>
@@ -1647,14 +1683,14 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
   /* ── Sticky header shadow on scroll ── */
   var header = document.getElementById('site-header');
   var waFloat = document.getElementById('wa-float');
+  var dock = document.querySelector('.dock');
 
   function onScroll(){
     if (header) header.toggleAttribute('data-stuck', window.scrollY > 8);
-    if (waFloat){
-      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 100;
-      waFloat.toggleAttribute('data-visible', pct >= 25);
-    }
+    var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 100;
+    if (waFloat) waFloat.toggleAttribute('data-visible', pct >= 25);
+    if (dock) dock.toggleAttribute('data-visible', pct >= 30);
   }
   onScroll();
   window.addEventListener('scroll', onScroll, {passive:true});
@@ -1773,9 +1809,9 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
     submitBtn.setAttribute('aria-busy','true');
     submitBtn.querySelector('.btn-label').textContent = 'שולחת…';
 
-    /* Creates/updates a Wix contact via the site's http-function — see
-       wix-backend/http-functions.js for the backend half of this call. */
-    var SUBMIT_URL = 'https://www.osteoliftingpro.com/_functions/submitSignup';
+    /* Creates a Wix Forms submission via our own serverless function —
+       see api/submit.js for the backend half of this call. */
+    var SUBMIT_URL = '/api/submit';
 
     fetch(SUBMIT_URL, {
       method: 'POST',
