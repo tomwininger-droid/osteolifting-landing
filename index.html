@@ -22,7 +22,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@600;700;800&family=Heebo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<script>document.documentElement.classList.add('js');</script>
+<script>
+document.documentElement.classList.add('js');
+try{
+  if (window.self !== window.top) document.documentElement.classList.add('embedded');
+}catch(e){
+  /* cross-origin access to window.top throws only when actually framed */
+  document.documentElement.classList.add('embedded');
+}
+</script>
 <style>
 /* ═══════════════════════════════════════════════════════════
    OSTEOLIFTING, DESIGN SYSTEM
@@ -893,6 +901,14 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 .wa-float svg{width:26px; height:26px; flex-shrink:0;}
 .wa-float[data-visible]{opacity:1; transform:none; pointer-events:auto;}
 .wa-float:hover{transform:translateY(-2px);}
+
+/* Embedded inside a Wix HtmlComponent: no real viewport of our own, so
+   position:fixed elements can't track scroll correctly. Hide them —
+   the page still has plenty of in-content CTA buttons. */
+.embedded .dock,
+.embedded .wa-float{display:none !important;}
+.embedded .site-header{position:static;}
+:root.embedded{--dock-h:0px;}
 
 /* ═══ REVEAL — restrained, and only where sequence matters ═══ */
 .js [data-reveal]{
