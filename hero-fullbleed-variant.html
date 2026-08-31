@@ -328,46 +328,47 @@ section{padding-block:var(--s-9);}
 /* ═══ HERO ═══════════════════════════════════════════════ */
 .hero{
   position:relative;
-  min-height:calc(100svh - var(--header-h)); min-height:calc(100vh - var(--header-h));
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; isolation:isolate;
-}
-.hero-bg{position:absolute; inset:0; z-index:0;}
-.hero-bg img{width:100%; height:100%; object-fit:cover; object-position:50% 18%; display:block;}
-.hero-bg iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-.hero-bg::after{
-  content:""; position:absolute; inset:0;
   background:
-    radial-gradient(760px 560px at 50% 40%, rgba(23,10,46,.25) 0%, rgba(23,10,46,.6) 66%, rgba(23,10,46,.84) 100%),
-    linear-gradient(0deg, rgba(23,10,46,.9) 0%, rgba(23,10,46,.3) 45%, rgba(23,10,46,.5) 100%);
+    radial-gradient(1000px 560px at 88% -14%, var(--v-100) 0%, transparent 60%),
+    linear-gradient(180deg, var(--v-50) 0%, var(--paper) 68%);
+  padding-block:var(--s-8) var(--s-9);
+  overflow:clip;
 }
 .hero-inner{
-  position:relative; z-index:1;
-  max-width:720px; margin-inline:auto;
-  padding-block:var(--s-6); padding-inline:var(--gutter);
+  max-width:640px; margin-inline:auto;
+  padding-inline:var(--gutter);
   text-align:center;
   display:flex; flex-direction:column; align-items:center;
 }
-.hero-inner .badge{
-  background:rgba(255,255,255,.14); color:#fff;
-  border:1px solid rgba(255,255,255,.3);
-  backdrop-filter:blur(6px);
+.hero-video{
+  position:relative;
+  width:100%; max-width:520px;
+  aspect-ratio:16/9;
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  margin-block:var(--s-6) var(--s-7);
+  box-shadow:var(--e-3);
+  border:1px solid var(--line-2);
 }
-.hero-inner .badge svg{color:var(--v-200);}
+.hero-video img{width:100%; height:100%; object-fit:cover; object-position:50% 15%; display:block;}
+.hero-video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.hero-video::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(23,10,46,.75) 0%, rgba(23,10,46,.1) 45%, rgba(23,10,46,.05) 100%);
+}
 .hero-play{
-  width:92px; height:92px; border-radius:50%;
+  position:absolute; z-index:1; inset:0; margin:auto;
+  width:78px; height:78px; border-radius:50%;
   background:rgba(255,255,255,.97);
   border:none; cursor:pointer;
   display:grid; place-items:center;
-  box-shadow:0 16px 40px rgba(9,4,24,.45);
+  box-shadow:0 14px 34px rgba(9,4,24,.4);
   color:var(--v-700);
-  margin-block:var(--s-5) var(--s-3);
   transition:transform var(--t-base-dur) var(--ease), box-shadow var(--t-base-dur) var(--ease);
-  position:relative;
 }
 .hero-play::before{
-  content:""; position:absolute; inset:-14px; border-radius:50%;
-  border:2px solid rgba(255,255,255,.5);
+  content:""; position:absolute; inset:-13px; border-radius:50%;
+  border:2px solid rgba(255,255,255,.55);
   animation:pulse 2.8s var(--ease-soft) infinite;
 }
 @keyframes pulse{
@@ -377,32 +378,25 @@ section{padding-block:var(--s-9);}
 }
 .hero-play:hover{transform:scale(1.06);}
 .hero-play:active{transform:scale(.96); transition-duration:90ms;}
-.hero-play svg{width:34px; height:34px; margin-inline-start:4px;}
+.hero-play svg{width:30px; height:30px; margin-inline-start:3px;}
 .hero-note{
-  font-size:var(--t-2xs); font-weight:600; color:rgba(255,255,255,.78);
-  margin-bottom:var(--s-3);
+  position:absolute; z-index:1; inset-inline:12px; inset-block-end:12px;
+  font-size:var(--t-2xs); font-weight:500; color:#fff;
+  background:rgba(23,10,46,.5); backdrop-filter:blur(6px);
+  padding:8px 12px; border-radius:var(--r-xs); text-align:center;
 }
-.hero h1{color:#fff; margin-bottom:var(--s-3); max-width:27ch;}
-.hero h1 .accent{
-  color:#fff;
-  background-image:linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35));
-  background-repeat:no-repeat; background-size:100% .28em; background-position:0 92%;
-  -webkit-box-decoration-break:clone; box-decoration-break:clone;
-}
-.hero .lead{color:rgba(255,255,255,.9); max-width:46ch; margin-inline:auto;}
-.hero-cta{margin-top:var(--s-5); max-width:420px; width:100%;}
-.hero .reassure{justify-content:center; color:rgba(255,255,255,.78);}
-.hero .reassure svg{color:var(--v-200);}
+.hero h1{margin-bottom:var(--s-4); max-width:24ch; margin-inline:auto;}
+.hero .lead{max-width:46ch; margin-inline:auto;}
+.hero-cta{margin-top:var(--s-6); max-width:420px; width:100%;}
+.hero .reassure{justify-content:center;}
 .hero-stat{
   margin-top:var(--s-5);
-  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.26);
-  backdrop-filter:blur(10px);
+  background:var(--v-50); border:1px solid var(--line);
   border-radius:var(--r-pill); padding:10px 18px;
   display:inline-flex; align-items:center; gap:var(--s-3);
-  color:#fff;
 }
-.hero-stat .n{font-family:var(--font-display); font-size:22px; font-weight:900; line-height:1; direction:ltr;}
-.hero-stat p{font-size:var(--t-2xs); color:rgba(255,255,255,.82); line-height:1.3; text-align:start;}
+.hero-stat .n{font-family:var(--font-display); font-size:22px; font-weight:900; color:var(--v-700); line-height:1; direction:ltr;}
+.hero-stat p{font-size:var(--t-2xs); color:var(--ink-2); line-height:1.3; text-align:start;}
 
 /* Quote — used in Lisa's section */
 .quote{
@@ -1030,20 +1024,20 @@ footer nav a{display:inline-flex; align-items:center; min-height:44px; padding-i
 
 <main id="main">
 
-<!-- ═══ HERO — full-bleed, video-centric ═══ -->
+<!-- ═══ HERO — contained video, title below ═══ -->
 <section class="hero" id="top">
-  <div class="hero-bg" id="video-frame" data-embed="">
-    <img src="images/testimonial-noam.jpg" alt="" role="presentation">
-  </div>
   <div class="hero-inner hero-anim">
     <span class="badge">
       <svg aria-hidden="true" focusable="false"><use href="#i-users"/></svg>
       לנשים 50+ עם אוסטיאופניה או אוסטאופורוזיס
     </span>
-    <button class="hero-play" type="button" id="play-btn" aria-label="נגני את סרטון ההיכרות של ליסה, כדקה">
-      <svg aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
-    </button>
-    <span class="hero-note" id="video-note">Placeholder — סרטון היכרות של ליסה (60 שניות). התמונה היא צילום אמיתי, לא הדמיה.</span>
+    <div class="hero-video" id="video-frame" data-embed="">
+      <img src="images/testimonial-noam.jpg" alt="" role="presentation">
+      <button class="hero-play" type="button" id="play-btn" aria-label="נגני את סרטון ההיכרות של ליסה, כדקה">
+        <svg aria-hidden="true" focusable="false"><use href="#i-play"/></svg>
+      </button>
+      <span class="hero-note" id="video-note">Placeholder — סרטון היכרות של ליסה (60 שניות)</span>
+    </div>
     <h1>עשית כל מה שהמליצו לך <span class="accent">והאוסטיאופורוזיס המשיך להחמיר?</span></h1>
     <p class="lead">שיטת אימון שנחקרה קלינית והוכחה כמעלה את צפיפות העצם — 2 אימונים בשבוע, 30 דקות, מהבית. בלי תרופות.</p>
     <div class="hero-cta">
