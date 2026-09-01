@@ -9,7 +9,9 @@
    ever navigates the tab away, so nothing is lost by keeping the
    journey in memory only.
 
-   Sends (when GA4 is present): gtag('event', 'cta_click', {...}).
+   Sends via GTM's dataLayer: dataLayer.push({event:'cta_click', ...}).
+   GTM container GTM-55BNP66S owns actual delivery to GA4 — this file
+   never calls gtag() directly, since GTM doesn't expose that global.
    Exposes window.__oslTrack.snapshot() so the signup form can
    attach the in-page journey to the lead on submit (added in a
    later phase).
@@ -66,14 +68,14 @@
     journey.counts[cta] = (journey.counts[cta] || 0) + 1;
     pushPath({ c: cta, s: section, t: t });
 
-    if (window.gtag) {
-      window.gtag("event", "cta_click", {
-        cta_id: cta,
-        cta_section: section,
-        cta_kind: kind,
-        cta_count: journey.counts[cta]
-      });
-    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "cta_click",
+      cta_id: cta,
+      cta_section: section,
+      cta_kind: kind,
+      cta_count: journey.counts[cta]
+    });
   }
 
   // Capture phase is load-bearing: #play-btn's own click handler
