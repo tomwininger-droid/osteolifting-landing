@@ -1709,6 +1709,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 </script>
 
+<script src="/posthog-init.js" defer></script>
 <script src="/track.js" defer></script>
 
 <script>
@@ -1860,6 +1861,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })
       .then(function(res){ if (!res.ok) throw new Error('submit failed'); return res.json(); })
       .then(function(){
+        if (window.posthog && window.posthog.capture) {
+          window.posthog.capture('lead_form_submitted', {
+            submission_channel: 'landing_page_form'
+          });
+        }
         form.style.display = 'none';
         success.style.display = 'block';
         success.scrollIntoView({block:'center', behavior: reduce ? 'auto' : 'smooth'});

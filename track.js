@@ -76,6 +76,15 @@
       cta_kind: kind,
       cta_count: journey.counts[cta]
     });
+
+    if (window.posthog && window.posthog.capture) {
+      window.posthog.capture("cta_click", {
+        cta_id: cta,
+        cta_section: section,
+        cta_kind: kind,
+        cta_count: journey.counts[cta]
+      });
+    }
   }
 
   // Capture phase is load-bearing: #play-btn's own click handler
