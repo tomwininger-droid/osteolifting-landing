@@ -723,6 +723,10 @@ section{padding-block:var(--s-9);}
 
 /* ═══ TESTIMONIALS ═══════════════════════════════════════ */
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s-5);}
+@media (min-width:1041px){
+  /* Centers a lone leftover card when the count doesn't divide evenly by 3 */
+  .grid-3 > :last-child:nth-child(3n+1){grid-column:2;}
+}
 .t-card{
   display:flex; flex-direction:column;
   height:100%; overflow:hidden;
@@ -1533,54 +1537,96 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="band--tint" data-section="testimonials">
   <div class="container">
     <div class="head head--center">
-      <h2>תוצאות אמיתיות, במספרים אמיתיים</h2>
+      <h2>מה הנשים שהשלימו את מחנה האימונים אומרות</h2>
     </div>
     <div class="grid-3 stagger">
       <figure class="t-card surface surface--raised" data-reveal>
-        <div class="t-hero t-hero--placeholder">
-          <span class="ph-note">Placeholder, תמונת רונית</span>
-        </div>
         <div class="t-body">
-          <div class="stars" role="img" aria-label="דירוג 5 מתוך 5">
-            <svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg>
-          </div>
-          <blockquote class="t-quote">"אחרי 8 חודשים הבדיקה הראתה שיפור. הרופאה שלי ביקשה את הפרטים של ליסה."</blockquote>
-          <span class="t-result"><svg aria-hidden="true" focusable="false"><use href="#i-trend"/></svg> [Placeholder: נתון T-score]</span>
+          <blockquote class="t-quote">"הידע החשוב שקיבלתי מליסה היה מצויין לי. למדתי המון תרגילים שמתאימים לגב ולירך. לפני המחנה אימונים לא היה לי מושג על דברים שצריך לדעת באוסטיאופורוזיס. והתחלתי להתאמן סוף סוף עם מאמנת."</blockquote>
           <figcaption class="t-person">
-            <span class="t-photo">תמונה</span>
-            <span><b>רונית</b><span>בת 63, רעננה</span></span>
+            <span class="t-photo"><img src="images/profile/1.png" alt="חווה שולמן" loading="lazy" width="52" height="52"></span>
+            <span><b>חווה שולמן</b></span>
           </figcaption>
         </div>
       </figure>
       <figure class="t-card surface surface--raised" data-reveal>
-        <div class="t-hero">
-          <img src="images/testimonial-dorit.jpg" alt="דורית זילבר מרימה משקולות" loading="lazy">
-        </div>
         <div class="t-body">
-          <div class="stars" role="img" aria-label="דירוג 5 מתוך 5">
-            <svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg>
-          </div>
-          <blockquote class="t-quote">"[Placeholder: הציטוט האמיתי של דורית, עדיין לא סופק]"</blockquote>
-          <span class="t-result"><svg aria-hidden="true" focusable="false"><use href="#i-trend"/></svg> [Placeholder: נתון]</span>
+          <blockquote class="t-quote">"השתתפתי במחנה האימונים של ליסה ואני מתחילה אימוני כוח, אחרי הרבה שנים שלא ידעתי מה לעשות. למדתי דברים שלא מלמדים אותנו בזכות ליסה במחנה האימונים. אחרי שבעה ימים של תרגול אני כבר מרגישה התחלה של שינוי. ממליצה למי שיש אוסטיאופורוזיס."</blockquote>
           <figcaption class="t-person">
-            <span class="t-photo"><img src="images/testimonial-dorit.jpg" alt="דורית זילבר" loading="lazy" width="52" height="52"></span>
-            <span><b>דורית זילבר</b><span>[גיל, עיר]</span></span>
+            <span class="t-photo"><img src="images/profile/2.png" alt="אווה קורן" loading="lazy" width="52" height="52"></span>
+            <span><b>אווה קורן</b></span>
           </figcaption>
         </div>
       </figure>
       <figure class="t-card surface surface--raised" data-reveal>
-        <div class="t-hero">
-          <img src="images/testimonial-noam.jpg" alt="נעם בן ישי מרימה משקולות" loading="lazy">
-        </div>
         <div class="t-body">
-          <div class="stars" role="img" aria-label="דירוג 5 מתוך 5">
-            <svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg><svg aria-hidden="true" focusable="false"><use href="#i-star"/></svg>
-          </div>
-          <blockquote class="t-quote">"[Placeholder: הציטוט האמיתי של נעם, עדיין לא סופק]"</blockquote>
-          <span class="t-result"><svg aria-hidden="true" focusable="false"><use href="#i-trend"/></svg> [Placeholder: נתון]</span>
+          <blockquote class="t-quote">"תודה לליסה על כל הדיוקים והיחס האישי במחנה האימונים. למדתי תרגילים מצוינים והתחלתי לעבוד על הגב התחתון שאני חייבת לחזק. אני לא ידעתי המון דברים על בניית עצם שליסה מלמדת במחנה אימונים, פשוט חשוב לכל אישה עם בריחת סידן."</blockquote>
           <figcaption class="t-person">
-            <span class="t-photo"><img src="images/testimonial-noam.jpg" alt="נעם בן ישי" loading="lazy" width="52" height="52"></span>
-            <span><b>נעם בן ישי</b><span>[גיל, עיר]</span></span>
+            <span class="t-photo"><img src="images/profile/4.png" alt="שלומית ארנון" loading="lazy" width="52" height="52"></span>
+            <span><b>שלומית ארנון</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"תודה על אתגר מחנה האימונים, ליסה ליוותה אותי 7 ימים ותיקנה לי את התרגילים. הידע והטיפים היו חדשים לי ולמדתי הרבה. מודה לליסה וממליצה להצטרף."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/6.png" alt="חדווה רבינוביץ" loading="lazy" width="52" height="52"></span>
+            <span><b>חדווה רבינוביץ</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"השתתפתי באתגר מחנה האימונים, הידע שליסה מעבירה, הוא חשוב ולא הרבה מכירים את זה בטח שהרופא לא סיפר לי את כל הדברים החשובים האלו. התחלתי לתרגל ועכשיו ממשיכה בתכנית אימונים, מרגישה שיפור בכוח ובגוף, תוכנית מצויינת."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/7.png" alt="ענת נחתומי" loading="lazy" width="52" height="52"></span>
+            <span><b>ענת נחתומי</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"נרשמתי למחנה אימונים כדי להתחיל לטפל באוסטיאופורוזיס. למדתי דברים חשובים מאוד, ליסה לימדה תרגילים מעולים לגב ולירך ונרשמתי לתכנית אימונים, מה שלא עשיתי שנים וחבל שלא הכרתי אותה לפני כן."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/8.png" alt="רונית שפירא" loading="lazy" width="52" height="52"></span>
+            <span><b>רונית שפירא</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"ממליצה על מחנה האימונים, אהבתי את התרגול הקצר, שני תרגילים ביום וליסה מתקנת וככה לומדים, תכנית קצרה ופשוטה שמלמדת מה לעשות ואיזה תרגילים לירך ולגב, הצלחתי להתמיד בנתיים באימונים עם ליסה בבית, מקווה להתמיד."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/9.png" alt="נאווה כהן" loading="lazy" width="52" height="52"></span>
+            <span><b>נאווה כהן</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"עם אוסטיאופורוזיס בירך 3.2 ובגב 2.8, הצטרפתי למחנה האימונים כי פשוט חייבת להתחיל לחזק. ליסה מלמדת כל מה שחייבים לדעת על אימוני בניית עצם. התחלתי לתרגל איתה, אני מצלמת והיא שולחת תיקונים. 7 ימים ברצף, ועכשיו אני עולה על מסלול האימונים, מקווה להמשיך כי חייבת."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/10.png" alt="דניה רוט" loading="lazy" width="52" height="52"></span>
+            <span><b>דניה רוט</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"ניסיתי את מחנה האימונים למרות שלא כל כך אוהבת און ליין, הופתעתי לטובה, באמת התחלתי לתרגל, וליסה מתקנת אותי דרך סרטונים שאני שולחת. קניתי זוג משקולות ואני סוף סוף מתאמנת בבית, למדתי המון דברים חשובים על אוסטיאופורוזיס, אני חייבת לשפר את המצב וממליצה על ליסה למי שכמוני לא יודעת מה לעשות."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/1.png" alt="אלינה הלר" loading="lazy" width="52" height="52"></span>
+            <span><b>אלינה הלר</b></span>
+          </figcaption>
+        </div>
+      </figure>
+      <figure class="t-card surface surface--raised" data-reveal>
+        <div class="t-body">
+          <blockquote class="t-quote">"הצטרפתי למחנה אימונים לבניית עצם בסוף יולי, ואני מתאמנת עכשיו בתכנית, למדתי במחנה דברים שאף אחד לא אמר לי, לא רופא ולא אנדוקרינולוגית. ליסה מתקנת אותי ומראה לי איזה תרגילים לגב, לרגליים, לידיים. אני מאוד מרוצה. ממליצה בחום."</blockquote>
+          <figcaption class="t-person">
+            <span class="t-photo"><img src="images/profile/2.png" alt="פאני רוזנפלד" loading="lazy" width="52" height="52"></span>
+            <span><b>פאני רוזנפלד</b></span>
           </figcaption>
         </div>
       </figure>
