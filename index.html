@@ -1884,7 +1884,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   /* ── Signup form ── */
   var form      = document.getElementById('signup-form');
-  var success   = document.getElementById('form-success');
   var errorBox  = document.getElementById('form-errors');
   var errorList = document.getElementById('form-errors-list');
   var submitBtn = document.getElementById('submit-btn');
@@ -1971,10 +1970,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             submission_channel: 'landing_page_form'
           });
         }
-        form.style.display = 'none';
-        success.style.display = 'block';
-        success.scrollIntoView({block:'center', behavior: reduce ? 'auto' : 'smooth'});
-        document.getElementById('success-heading').focus();
+        window.location.href = 'https://zoomlive.ravpage.co.il/camptyp';
       })
       .catch(function(){
         submitBtn.removeAttribute('data-loading');
