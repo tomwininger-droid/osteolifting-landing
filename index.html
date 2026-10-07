@@ -856,6 +856,12 @@ section{padding-block:var(--s-9);}
 .field input[aria-invalid="true"]{border-color:var(--danger); box-shadow:0 0 0 4px rgba(158,27,55,.12);}
 .field .hint{display:block; font-size:var(--t-xs); color:var(--ink-3); margin-top:6px;}
 .field .field-error{display:block; font-size:var(--t-xs); font-weight:700; color:var(--danger); margin-top:6px;}
+.consent{margin-bottom:var(--s-4);}
+.consent label{display:flex; align-items:flex-start; gap:12px; cursor:pointer; font-size:var(--t-sm); color:var(--ink); line-height:1.5;}
+.consent input{flex-shrink:0; width:22px; height:22px; margin:2px 0 0; accent-color:var(--v-600); cursor:pointer;}
+.consent input:focus-visible{outline:3px solid rgba(90,49,180,.4); outline-offset:2px;}
+.consent input[aria-invalid="true"]{outline:2px solid var(--danger); outline-offset:2px;}
+.consent .field-error{display:block; font-size:var(--t-xs); font-weight:700; color:var(--danger); margin-top:6px;}
 .hp{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; pointer-events:none;}
 .form-note{font-size:var(--t-xs); color:var(--ink-3); text-align:center; margin-top:var(--s-4);}
 .form-success{display:none; text-align:center; padding-block:var(--s-5);}
@@ -1737,6 +1743,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="field-error" id="err-email" hidden></span>
         </div>
 
+        <div class="consent">
+          <label for="f-consent">
+            <input id="f-consent" name="consent" type="checkbox" required aria-describedby="err-consent">
+            <span>אני מאשרת קבלת דיוור ותכנים בנוגע לתכנית. אפשר להסיר בכל רגע. *</span>
+          </label>
+          <span class="field-error" id="err-consent" hidden></span>
+        </div>
+
         <div class="hp" aria-hidden="true">
           <label for="f-company">אל תמלאי שדה זה</label>
           <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
@@ -1747,7 +1761,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="btn-label">אני רוצה להצטרף למחנה</span>
           <svg class="btn-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg>
         </button>
-        <p class="form-note">בהרשמה את מאשרת קבלת תכנים בנוגע לתכנית. אפשר להסיר בכל רגע.</p>
       </form>
 
       <div class="form-success" id="form-success" role="status">
@@ -1897,8 +1910,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      message:'מספר הטלפון לא שלם, נשלח אליו את הגישה בוואטסאפ'},
     {id:'f-email', errId:'err-email', label:'אימייל',
      validate:function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
-     message:'כתובת האימייל לא תקינה'}
+     message:'כתובת האימייל לא תקינה'},
+    {id:'f-consent', errId:'err-consent', label:'אישור דיוור', checkbox:true,
+     validate:function(v){ return v === true; },
+     message:'כדי להצטרף צריך לאשר קבלת דיוור'}
   ];
+
+  function valueOf(f){
+    var input = document.getElementById(f.id);
+    return f.checkbox ? input.checked : input.value;
+  }
 
   function clearError(f){
     var input = document.getElementById(f.id), err = document.getElementById(f.errId);
@@ -1914,8 +1935,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   /* Re-validate on blur once a field has already errored */
   FIELDS.forEach(function(f){
     var input = document.getElementById(f.id);
-    input.addEventListener('blur', function(){
-      if (input.hasAttribute('aria-invalid') && f.validate(input.value)) clearError(f);
+    input.addEventListener(f.checkbox ? 'change' : 'blur', function(){
+      if (input.hasAttribute('aria-invalid') && f.validate(valueOf(f))) clearError(f);
     });
   });
 
@@ -1925,8 +1946,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     var invalid = [];
     FIELDS.forEach(function(f){
-      var input = document.getElementById(f.id);
-      if (f.validate(input.value)) clearError(f); else { setError(f); invalid.push(f); }
+      if (f.validate(valueOf(f))) clearError(f); else { setError(f); invalid.push(f); }
     });
 
     if (invalid.length){
