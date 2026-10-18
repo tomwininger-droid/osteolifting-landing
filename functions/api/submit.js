@@ -1,31 +1,35 @@
 const WIX_SITE_ID = '6e6b6634-c22b-4a4e-bf5a-28cca8d3e272';
 const WIX_FORM_ID = '488f4551-badb-4d67-9246-a2c796343b57';
 
-module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'method_not_allowed' });
-    return;
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+export async function onRequestPost({ request, env }) {
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json(400, { error: 'invalid_json' });
   }
 
-  const { name, phone, email } = req.body || {};
+  const { name, phone, email } = body || {};
 
   if (typeof name !== 'string' || name.trim().length < 2) {
-    res.status(400).json({ error: 'invalid_name' });
-    return;
+    return json(400, { error: 'invalid_name' });
   }
   if (typeof phone !== 'string' || phone.replace(/[^0-9]/g, '').length < 9) {
-    res.status(400).json({ error: 'invalid_phone' });
-    return;
+    return json(400, { error: 'invalid_phone' });
   }
   if (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
-    res.status(400).json({ error: 'invalid_email' });
-    return;
+    return json(400, { error: 'invalid_email' });
   }
 
-  const apiKey = process.env.WIX_API_KEY;
-  if (!apiKey) {
-    res.status(500).json({ error: 'server_misconfigured' });
-    return;
+  if (!env.WIX_API_KEY) {
+    return json(500, { error: 'server_misconfigured' });
   }
 
   try {
@@ -33,7 +37,7 @@ module.exports = async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': apiKey,
+        'Authorization': env.WIX_API_KEY,
         'wix-site-id': WIX_SITE_ID
       },
       body: JSON.stringify({
@@ -49,15 +53,13 @@ module.exports = async (req, res) => {
     });
 
     if (!wixRes.ok) {
-      const errBody = await wixRes.text();
-      console.error('Wix submission failed', wixRes.status, errBody);
-      res.status(502).json({ error: 'wix_submission_failed' });
-      return;
+      console.error('Wix submission failed', wixRes.status, await wixRes.text());
+      return json(502, { error: 'wix_submission_failed' });
     }
 
-    res.status(200).json({ ok: true });
+    return json(200, { ok: true });
   } catch (err) {
     console.error('Wix submission error', err);
-    res.status(502).json({ error: 'wix_submission_failed' });
+    return json(502, { error: 'wix_submission_failed' });
   }
-};
+}

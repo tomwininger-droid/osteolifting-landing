@@ -7,3 +7,5 @@ __pycache__/
 .env.local
 .env*
 node_modules/
+.wrangler/
+.dev.vars
